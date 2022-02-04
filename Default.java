@@ -17,7 +17,6 @@ public class Default {
     	String s2 = "POOL";
 
     	System.out.println("substring");
-    	System.out.println(s1);
     	System.out.println(substring(s1,s2));
     	System.out.println();
     	
@@ -57,33 +56,32 @@ public class Default {
     	int shortest = s1.length();
     	int temp = 0;
     	boolean met = false;
-    	String substring = b.toString();
+    	String substring = "";
     	
     	for(int i = 0; i < s2.length(); i++) {
     		Character l = s2.charAt(i);
-    		if(!c.containsKey(l)) {c.put(l, 1);}
-    		else {c.put(l, (c.get(l) + 1));}
+    		if(!c.containsKey(l)) c.put(l, 1);
+    		else c.put(l, (c.get(l) + 1));
 	    }
-
-		System.out.println(c.keySet() + " " + c.values());
+    	
+    	System.out.println(s1);
+		System.out.println(c);
 		
     	for(int i = 0; i < s1.length(); i++) {
     		Character t = s1.charAt(i);
     		a.add(t);
     		temp++;
-    		if(c.containsKey(t)) {
-    			c.put(t,c.get(t) - 1);
-    		}
+    		if(c.containsKey(t)) c.put(t,c.get(t) - 1);
     		
-    		boolean loop = true;
     		b.clear();
     		b.addAll(a);
+    		boolean loop = true;
 			
 		for(Character j : b) {
 			if(loop) {
 				if(!c.containsKey(j)) {a.poll(); temp--;}
 				else if(c.get(j) <= -1) {c.put(j, c.get(j) + 1); a.poll(); temp--;}
-				else {loop = false;}
+				else loop = false;
 
 				if(temp < shortest) {
 					met = true;
@@ -99,23 +97,20 @@ public class Default {
 			}
 		}
     	}
-    	
-    	substring = d.toString();
+    	for (Character i : d) {
+    		substring += i;
+    	}
     	return substring;
-    	
     }
     
     public static int rectangle(int[] h) {
-    	int l = 0;
-    	int t = 0;
-    	int s = 1;
+    	int l = 0, t = 0, s = 1;
     	for(int i = 0; i < h.length; i++) {
     		t += h[i];
     		for(int j = i + 1; s != 0 && (j < h.length); j += s) {
     			if(j <= 0) s = 0;
     			else if(h[j] < h[i]) {if(s == -1) {s = 0;} s *= -1; j = i;}
     			else t += h[i];
-    			
     		}
     		if(t > l) l = t;
     		t = 0;
