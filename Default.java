@@ -79,26 +79,25 @@ public class Default {
     		b.clear();
     		b.addAll(a);
 			
-			for(Character j : b) {
-				if(loop) {
-					if(!c.containsKey(j)) {a.poll(); temp--;}
-					else if(c.get(j) <= -1) {c.put(j, c.get(j) + 1); a.poll(); temp--;}
-					else {loop = false;}
-					
-					if(temp < shortest) {
-						met = true;
-						for(Integer k : c.values()) {
-							if(!(k <= 0)) {met = false;}
-						}
-						if(met) {
-							d.clear();
-							d.addAll(a);
-							shortest = temp;
-						}
+		for(Character j : b) {
+			if(loop) {
+				if(!c.containsKey(j)) {a.poll(); temp--;}
+				else if(c.get(j) <= -1) {c.put(j, c.get(j) + 1); a.poll(); temp--;}
+				else {loop = false;}
+
+				if(temp < shortest) {
+					met = true;
+					for(Integer k : c.values()) {
+						if(!(k <= 0)) {met = false;}
 					}
-					
+					if(met) {
+						d.clear();
+						d.addAll(a);
+						shortest = temp;
+					}
 				}
 			}
+		}
     	}
     	
     	substring = d.toString();
